@@ -1,0 +1,99 @@
+{
+  "task": "AG-LAK-001",
+  "capabilities": ["LH-C01", "LH-C02", "LH-C07", "LH-C08", "LH-C14"],
+  "lakehouse": "AG_LAK_001_Foundry",
+  "notebook": "AG-LAK-001-Foundry",
+  "defaultSchema": "dbo",
+  "checks": [
+    {
+      "id": "lakehouse-provisioned",
+      "type": "lakehouse-item",
+      "question": "Schema-enabled lakehouse, filed in the Lakehouse folder, SQL endpoint finished provisioning?",
+      "expect": {
+        "schemaEnabled": true,
+        "defaultSchema": "dbo",
+        "sqlEndpoint": "Success",
+        "folder": "Lakehouse"
+      }
+    },
+    {
+      "id": "notebook-exists",
+      "type": "notebook-item",
+      "question": "The notebook item exists, is filed correctly, and addresses the table by schema?",
+      "expect": {
+        "folder": "Lakehouse",
+        "sourceContains": ["retail.product"],
+        "sourceLacks": ["!pip"]
+      }
+    },
+    {
+      "id": "notebook-ran-green",
+      "type": "job-run",
+      "question": "The notebook was actually executed and its latest run reached Completed?",
+      "expect": { "status": "Completed", "minRuns": 1 }
+    },
+    {
+      "id": "table-in-retail-schema",
+      "type": "lakehouse-table",
+      "table": "product",
+      "schema": "retail",
+      "question": "The table landed in the retail schema with all five columns?",
+      "expect": {
+        "columns": ["sku", "name", "category", "unit_price", "in_stock"]
+      }
+    },
+    {
+      "id": "table-not-in-dbo",
+      "type": "lakehouse-table",
+      "table": "product",
+      "schema": "dbo",
+      "question": "The table did NOT land in the default schema — an unqualified saveAsTable('product') puts it in dbo, which passes a naive existence check while breaking the contract.",
+      "expect": { "exists": false }
+    },
+    {
+      "id": "q1-row-count",
+      "type": "spark-sql",
+      "table": "product",
+      "schema": "retail",
+      "question": "All eight products loaded — no header row consumed as data, no rows dropped?",
+      "sql": "SELECT COUNT(*) AS n FROM {table}",
+      "expect": { "scalar": 8 }
+    },
+    {
+      "id": "q2-category-count",
+      "type": "spark-sql",
+      "table": "product",
+      "schema": "retail",
+      "question": "Three distinct categories?",
+      "sql": "SELECT COUNT(DISTINCT category) AS n FROM {table}",
+      "expect": { "scalar": 3 }
+    },
+    {
+      "id": "q3-stock-total",
+      "type": "spark-sql",
+      "table": "product",
+      "schema": "retail",
+      "question": "Total stock is 412 — an in_stock column that landed as a string still sums, so this also catches a CRLF-mangled last column.",
+      "sql": "SELECT SUM(in_stock) AS total FROM {table}",
+      "expect": { "scalar": 412 }
+    },
+    {
+      "id": "q4-price-total",
+      "type": "spark-sql",
+      "table": "product",
+      "schema": "retail",
+      "question": "Prices survived the CSV round-trip with their decimals intact?",
+      "sql": "SELECT ROUND(SUM(unit_price), 2) AS total FROM {table}",
+      "expect": { "scalar": 186.84 }
+    },
+    {
+      "id": "q5-known-row",
+      "type": "spark-sql",
+      "table": "product",
+      "schema": "retail",
+      "question": "A specific row is byte-correct — the most expensive product.",
+      "sql": "SELECT sku, category FROM {table} ORDER BY unit_price DESC LIMIT 1",
+      "expect": { "rows": [{ "sku": "FS-1003", "category": "Tools" }] }
+    }
+  ]
+}

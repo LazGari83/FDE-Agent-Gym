@@ -1,0 +1,726 @@
+{
+  "bundle": "data-eng-trial",
+  "title": "Frontier Data Engineer \u2014 Trial",
+  "community": "frontier-data-engineer",
+  "tier": "trial",
+  "version": "1.3",
+  "built": "2026-09-10",
+  "hash": "sha256",
+  "files": 119,
+  "contents": [
+    {
+      "path": ".claude/skills/_shared/kbmd.py",
+      "from": ".claude\\skills\\_shared\\kbmd.py",
+      "listed_as": ".claude/skills/_shared/",
+      "sha256": "e43e19528243241a765a39ff09256974fc2ee16111df811b9602165896f78049"
+    },
+    {
+      "path": ".claude/skills/check-training-progress/SKILL.md",
+      "from": ".claude\\skills\\check-training-progress\\SKILL.md",
+      "listed_as": ".claude/skills/check-training-progress/",
+      "sha256": "03b2f7a254b5a72e3355d8036992f14a78d5b3d3da73c212a1ceec1e3afa3fa5"
+    },
+    {
+      "path": ".claude/skills/check-training-progress/capability_coverage.py",
+      "from": ".claude\\skills\\check-training-progress\\capability_coverage.py",
+      "listed_as": ".claude/skills/check-training-progress/",
+      "sha256": "13b214eec041df4b046850be466c490d02209f2276139a3ecd4de03464681bb9"
+    },
+    {
+      "path": ".claude/skills/check-training-progress/tracker_sync.py",
+      "from": ".claude\\skills\\check-training-progress\\tracker_sync.py",
+      "listed_as": ".claude/skills/check-training-progress/",
+      "sha256": "3d6664869f2090dd740a5f63c7b2b5de1e25e18c67d3f238c3cd05419b16ab68"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/SKILL.md",
+      "from": ".claude\\skills\\execute-gym-rep\\SKILL.md",
+      "listed_as": ".claude/skills/execute-gym-rep/SKILL.md",
+      "sha256": "bbe4640c4f49c668221be0f5e02464dc4b81ccc9d297fbc83eaf234429242e13"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/gym_run.py",
+      "from": ".claude\\skills\\execute-gym-rep\\gym_run.py",
+      "listed_as": ".claude/skills/execute-gym-rep/gym_run.py",
+      "sha256": "d5e478c3578c6ec1d5311c93c3c34591d5f3e32131d750e7ddd72aedd13323a4"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/gym_steps/__init__.py",
+      "from": ".claude\\skills\\execute-gym-rep\\gym_steps\\__init__.py",
+      "listed_as": ".claude/skills/execute-gym-rep/gym_steps/__init__.py",
+      "sha256": "bbc2548dd609bde418bfe26f549c7cbbdcd95b3e3dc540f5a4e8a0f921d1e54d"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/gym_steps/common.py",
+      "from": ".claude\\skills\\execute-gym-rep\\gym_steps\\common.py",
+      "listed_as": ".claude/skills/execute-gym-rep/gym_steps/common.py",
+      "sha256": "a56431ff4cf8d14597ba721129385b2a271f8e6a78c07c5772d26555add7264c"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/gym_steps/lakehouse.py",
+      "from": ".claude\\skills\\execute-gym-rep\\gym_steps\\lakehouse.py",
+      "listed_as": ".claude/skills/execute-gym-rep/gym_steps/lakehouse.py",
+      "sha256": "456d69c002906d0998a516e04294482b18988bdb180d71ede9fc895c529e2c3a"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/gym_validate.py",
+      "from": ".claude\\skills\\execute-gym-rep\\gym_validate.py",
+      "listed_as": ".claude/skills/execute-gym-rep/gym_validate.py",
+      "sha256": "52a200a096f7173f034befdc33934b72e440c3ce02b4c299ab98a8f22c6a79f0"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/preflight_probe.py",
+      "from": ".claude\\skills\\execute-gym-rep\\preflight_probe.py",
+      "listed_as": ".claude/skills/execute-gym-rep/preflight_probe.py",
+      "sha256": "2423e3f2f8c85b62fb4eebd2444baf0a5006ede86009b0a7a8b06f0f359355db"
+    },
+    {
+      "path": ".claude/skills/execute-gym-rep/rep_log.py",
+      "from": ".claude\\skills\\execute-gym-rep\\rep_log.py",
+      "listed_as": ".claude/skills/execute-gym-rep/rep_log.py",
+      "sha256": "ddf8d501dbeda0ed2cea1cbcd557929c221ff3ec169021741ed6d181ec490fd8"
+    },
+    {
+      "path": ".claude/skills/fabric-ingest/SKILL.md",
+      "from": ".claude\\skills\\fabric-ingest\\SKILL.md",
+      "listed_as": ".claude/skills/fabric-ingest/",
+      "sha256": "8760af110b3f73a9f4c497de42010dfbe5d9e18cf20af36d67cc44e452fce308"
+    },
+    {
+      "path": ".claude/skills/fabric-lint/SKILL.md",
+      "from": ".claude\\skills\\fabric-lint\\SKILL.md",
+      "listed_as": ".claude/skills/fabric-lint/",
+      "sha256": "8d245a3301ab34f631833c3b069e57b6b22b821e748a345bc64142a5bcecf693"
+    },
+    {
+      "path": ".claude/skills/fabric-lint/anchor_check.py",
+      "from": ".claude\\skills\\fabric-lint\\anchor_check.py",
+      "listed_as": ".claude/skills/fabric-lint/",
+      "sha256": "24a685cd3d08486e2397f61ced3c434ff57ce701bda200fc7f42d416a788450e"
+    },
+    {
+      "path": ".claude/skills/fabric-lint/refuted_claims.py",
+      "from": ".claude\\skills\\fabric-lint\\refuted_claims.py",
+      "listed_as": ".claude/skills/fabric-lint/",
+      "sha256": "b2d423a02edd497a1297846d52becc87883c5960149ab3d8a102f5c3ccf1733a"
+    },
+    {
+      "path": ".claude/skills/fabric-lint/stale_task_claims.py",
+      "from": ".claude\\skills\\fabric-lint\\stale_task_claims.py",
+      "listed_as": ".claude/skills/fabric-lint/",
+      "sha256": "cf08a3cc42b629b3e4a7ead7fc332f9b68f1fcc391fbb2116a0695b47b9a53d2"
+    },
+    {
+      "path": ".claude/skills/port-project-to-another-model/SKILL.md",
+      "from": ".claude\\skills\\port-project-to-another-model\\SKILL.md",
+      "listed_as": ".claude/skills/port-project-to-another-model/",
+      "sha256": "f60a56c332b9f7ffe9ea7fe500fbe4be4b4b1c4f1721de9d3fc9f4d81d975cc6"
+    },
+    {
+      "path": ".claude/skills/port-project-to-another-model/port.py",
+      "from": ".claude\\skills\\port-project-to-another-model\\port.py",
+      "listed_as": ".claude/skills/port-project-to-another-model/",
+      "sha256": "1b4ac3968ffcca8797d26e1f253f0d1a5a6292b640acc04fdef2e7d2c3001cdd"
+    },
+    {
+      "path": ".claude/skills/update-framework/SKILL.md",
+      "from": ".claude\\skills\\update-framework\\SKILL.md",
+      "listed_as": ".claude/skills/update-framework/",
+      "sha256": "998c77bae725ade765f807e397972afd7a985e1fdff994b039938fd7eede21dc"
+    },
+    {
+      "path": ".claude/skills/update-framework/update_framework.py",
+      "from": ".claude\\skills\\update-framework\\update_framework.py",
+      "listed_as": ".claude/skills/update-framework/",
+      "sha256": "541a34f9d4f6ee30f83cfcf0d7ac513cc2bbe05537916d9071508b690607e284"
+    },
+    {
+      "path": ".env.example",
+      "from": "generated",
+      "listed_as": "generated: .env.example (3 var(s))",
+      "sha256": "e62324b86008a4b5ae42af0d1e93f1725c90f20188f5ceba5985f04f332a5648"
+    },
+    {
+      "path": ".gitattributes",
+      "from": ".gitattributes",
+      "listed_as": ".gitattributes",
+      "sha256": "2b8aaada262ed07554107403527792429fc3900edea0f95b10b33fe3d06e39e3"
+    },
+    {
+      "path": ".gitignore",
+      "from": ".gitignore",
+      "listed_as": ".gitignore",
+      "sha256": "1912b4293129d30b927405fcf9b879c3cd2f2d2148da045bd4fb092f13b130d7"
+    },
+    {
+      "path": "0_admin/capabilities/README.md",
+      "from": "0_admin\\capabilities\\README.md",
+      "listed_as": "0_admin/capabilities/README.md",
+      "sha256": "d094b72ac330451acb0929471b7788b30eacaa84805f6f3eca29125a16034963"
+    },
+    {
+      "path": "0_admin/capabilities/coverage.md",
+      "from": "derived",
+      "listed_as": "derived: capability_coverage.py --write",
+      "sha256": "d707bc7ff2340050809f64b3e8640f3cb34afe9226e9562f0917170e0ef17869"
+    },
+    {
+      "path": "0_admin/capabilities/lakehouse.md",
+      "from": "generated",
+      "listed_as": "capabilities: trimmed, 13 rows",
+      "sha256": "85e6385724b20461ce3b18d8745b1f7811cc2ff133bfed45998dcce185b5bbea"
+    },
+    {
+      "path": "0_admin/logs/README.md",
+      "from": "0_admin\\logs\\README.md",
+      "listed_as": "0_admin/logs/README.md",
+      "sha256": "b8542612816ab6b4bd8e684c058f7c839d45b018d078728990c792a09c713090"
+    },
+    {
+      "path": "0_admin/logs/circuits/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: shared",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "0_admin/references/README.md",
+      "from": "0_admin\\references\\README.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "9ca800b561be7d26c83c7045724edeb27c658716473de34f5ef14f2c6ddc4a2d"
+    },
+    {
+      "path": "0_admin/references/atom-template.md",
+      "from": "0_admin\\references\\atom-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "387ec87e98a89477d02bf1c632bcf1e35cf3cf407cb270217cbf64839593a703"
+    },
+    {
+      "path": "0_admin/references/capability-template.md",
+      "from": "0_admin\\references\\capability-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "62c1ccaab6b16e9104d502a9cb5f96043268bb2de41769275493b56f8387b7f7"
+    },
+    {
+      "path": "0_admin/references/circuit-log-template.md",
+      "from": "0_admin\\references\\circuit-log-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "687fd87850e2f15a5ecadaffa2b3304d3aab7f62f14f067a621337cf6da04963"
+    },
+    {
+      "path": "0_admin/references/decision-template.md",
+      "from": "0_admin\\references\\decision-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "dd0238d72ba6a21a6da3eae76461f08f4bfde26ce912139e763fd2a5590437b9"
+    },
+    {
+      "path": "0_admin/references/gym-rep-report-template.md",
+      "from": "0_admin\\references\\gym-rep-report-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "84e68faac19020714f0ba20579596377cde54e6ef23d59479ac3c709e42654db"
+    },
+    {
+      "path": "0_admin/references/index-template.md",
+      "from": "0_admin\\references\\index-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "08fa30934ee7e9b7b70fd0e7ba6bd74cea7b8ffb9d188b82f4a332a56a08553b"
+    },
+    {
+      "path": "0_admin/references/pattern-template.md",
+      "from": "0_admin\\references\\pattern-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "2ad2c0bf14a549e193b383a9efc7cec970f9208a8bca7c9acd4920e49d08082f"
+    },
+    {
+      "path": "0_admin/references/raw-template.md",
+      "from": "0_admin\\references\\raw-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "73291ee55110de9d85d7d08af624101b0d59a6f03f4ed0992341adffdffe1d36"
+    },
+    {
+      "path": "0_admin/references/task-template.md",
+      "from": "0_admin\\references\\task-template.md",
+      "listed_as": "0_admin/references/",
+      "sha256": "fcc93166f1fd94865ccd3f1227cf6920efe391a9627571eb1215502bc412c0db"
+    },
+    {
+      "path": "1_agent-gym/README.md",
+      "from": "1_agent-gym\\README.md",
+      "listed_as": "1_agent-gym/README.md",
+      "sha256": "25ac08957bd91700e731c25de295219ab1647633f52fa26696f0fce84d7f8ff0"
+    },
+    {
+      "path": "1_agent-gym/cicd/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1_agent-gym/ingestion/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1_agent-gym/key-vault/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-001/provision.py",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-001\\provision.py",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-001/",
+      "sha256": "ebab57fcb47fd51a97d0d58df3c299af34eef0a46ae07d3d9913e9f120598c7f"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-001/source-data/product.csv",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-001\\source-data\\product.csv",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-001/",
+      "sha256": "805f2a9c996a6400aa28f30fc0f94521809c0d7607a1b088e991a1dcd1ef23b3"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-001/task.md",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-001\\task.md",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-001/",
+      "sha256": "d1648f4a28841ccea7168f2738f829e97455f76f605ac0f87603e46adab3c3b8"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-001/validate.json",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-001\\validate.json",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-001/",
+      "sha256": "54287226fee8043dd9c55a17dfa7f2f160952374fed427eba3fc282f1eff431c"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-002/provision.py",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-002\\provision.py",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-002/",
+      "sha256": "89f72ce48f6d825fbbace31cc7fe19638bd4716441b961633ccbbe356f82f8fd"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-002/source-data/calibration_run.csv",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-002\\source-data\\calibration_run.csv",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-002/",
+      "sha256": "24f2e0626e8d7ba6b0ff11275e577841ecf0f120bd87fb1ea8cafcf4cc02bec9"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-002/task.md",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-002\\task.md",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-002/",
+      "sha256": "284c1d6d32002cd1daf0827853952fa40e9ef76db1681451a61bb40f46c84ea3"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/AG-LAK-002/validate.json",
+      "from": "1_agent-gym\\lakehouse\\AG-LAK-002\\validate.json",
+      "listed_as": "1_agent-gym/lakehouse/AG-LAK-002/",
+      "sha256": "fed579bbe3366ced462afebabbe104e7c4abb6b27033bc950d1a5fb0eefa2fad"
+    },
+    {
+      "path": "1_agent-gym/lakehouse/index.md",
+      "from": "generated",
+      "listed_as": "generated: task index",
+      "sha256": "780ed497e2cc9fadcc487d30efca326685e0f72ed2b2c371930684f37ce8fcbb"
+    },
+    {
+      "path": "1_agent-gym/openmirror/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1_agent-gym/pipelines/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "1_agent-gym/tracker.md",
+      "from": "derived",
+      "listed_as": "derived: tracker_sync.py --write",
+      "sha256": "2e6d78a7aa25f7d455c04ae602ba1514eabed4a9b05db4e05b14813ff5e874cd"
+    },
+    {
+      "path": "2_raw/README.md",
+      "from": "2_raw\\README.md",
+      "listed_as": "2_raw/README.md",
+      "sha256": "ffc46db833a95588bcb50fa669f31bc83845e6f31333dd64e0a50a90a004771f"
+    },
+    {
+      "path": "2_raw/capacity/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/cicd/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/experiments/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: shared",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/capacity/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/cicd/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/ingestion/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/key-vault/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/lakehouse/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/openmirror/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/pipelines/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/gym-rep-reports/testing/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/ingestion/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/key-vault/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/lakehouse/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/openmirror/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/pipelines/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/specs/README.md",
+      "from": "2_raw\\specs\\README.md",
+      "listed_as": "2_raw/specs/README.md",
+      "sha256": "71a6c2d330d384a15289ba3109ef539453b56186839eb4382acd2fdcb16ede50"
+    },
+    {
+      "path": "2_raw/testing/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "2_raw/thoughts/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: shared",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/capacity/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/capacity/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/cicd/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/cicd/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/decisions/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: shared",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/index.md",
+      "from": "generated",
+      "listed_as": "generated: wiki index (per community)",
+      "sha256": "557e5c6e66e89df2c610f361768f4b573e680153af0c41b13265eada5f382d81"
+    },
+    {
+      "path": "3_wiki/ingestion/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/ingestion/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/key-vault/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/key-vault/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/lakehouse/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/lakehouse/build-framework.md",
+      "from": "3_wiki\\lakehouse\\build-framework.md",
+      "listed_as": "3_wiki/lakehouse/build-framework.md",
+      "sha256": "deeb957a6eb2be1af5df38213550d1172c5830e2747da818ef87b49fc74c65cc"
+    },
+    {
+      "path": "3_wiki/lakehouse/coding-guidance.md",
+      "from": "3_wiki\\lakehouse\\coding-guidance.md",
+      "listed_as": "3_wiki/lakehouse/coding-guidance.md",
+      "sha256": "9e8383795d137a80b205e246802bf6d640c9a56cadf0f94ca7564d354caae1b9"
+    },
+    {
+      "path": "3_wiki/lakehouse/design-framework.md",
+      "from": "3_wiki\\lakehouse\\design-framework.md",
+      "listed_as": "3_wiki/lakehouse/design-framework.md",
+      "sha256": "26516219b6630565a5098d5a546596a753dc8c3b939f89df1ac0d01651dff3ac"
+    },
+    {
+      "path": "3_wiki/lakehouse/gotchas.md",
+      "from": "3_wiki\\lakehouse\\gotchas.md",
+      "listed_as": "3_wiki/lakehouse/gotchas.md",
+      "sha256": "655100fd2a64bf942af31ebb12f0cb3a31bb62799cda80d2c369472a89052348"
+    },
+    {
+      "path": "3_wiki/lakehouse/operate-framework.md",
+      "from": "3_wiki\\lakehouse\\operate-framework.md",
+      "listed_as": "3_wiki/lakehouse/operate-framework.md",
+      "sha256": "9f7bf276ea6bf8e6d4cbcbf8773b7445a538f909490cf5bc431744e7bce6f860"
+    },
+    {
+      "path": "3_wiki/lakehouse/prerequisites-and-fit.md",
+      "from": "3_wiki\\lakehouse\\prerequisites-and-fit.md",
+      "listed_as": "3_wiki/lakehouse/prerequisites-and-fit.md",
+      "sha256": "397f11c4e376f05cc8b7ed6b7596dcc42600b0ec7f6f18443673da0c33b1390e"
+    },
+    {
+      "path": "3_wiki/log.md",
+      "from": "3_wiki\\log.md",
+      "listed_as": "3_wiki/log.md",
+      "sha256": "fc0088ae457768e846cd7799f8be52acfbeca86d6687cb0c135a8d0f91d054ff"
+    },
+    {
+      "path": "3_wiki/openmirror/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/openmirror/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/pipelines/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/pipelines/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/testing/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "3_wiki/testing/atoms/.gitkeep",
+      "from": "generated",
+      "listed_as": "scaffold: frontier-data-engineer",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "CLAUDE.md",
+      "from": "CLAUDE.md",
+      "listed_as": "CLAUDE.md",
+      "sha256": "9ff8771176c8ef09b5a919c1050288504b786c8a7ac094b143a1a179a3b61c9d"
+    },
+    {
+      "path": "LICENSE.md",
+      "from": "LICENSE.md",
+      "listed_as": "LICENSE.md",
+      "sha256": "0fd226b3fa17456d328cea9f36363598131cc6fb6e6563651df7310060c42e67"
+    },
+    {
+      "path": "NOTICE.md",
+      "from": "NOTICE.md",
+      "listed_as": "NOTICE.md",
+      "sha256": "9956032aa38764620dcc36f93f6e693bb3fd7d59356285ec34bb7a748aff6c8a"
+    },
+    {
+      "path": "README.md",
+      "from": "generated",
+      "listed_as": "generated: readme",
+      "sha256": "0c727258546c4c5c30f675acbb21ccc6749310ab7ec128e64ef0844939bbfd9a"
+    },
+    {
+      "path": "code/README.md",
+      "from": "generated",
+      "listed_as": "generated: toolkit map (subset)",
+      "sha256": "0cb6fb26cb56622e04a6dd5e83f375c96681136896d5cdf82e5cb43049b5ca54"
+    },
+    {
+      "path": "code/clients/lakehouse_client.py",
+      "from": "code\\clients\\lakehouse_client.py",
+      "listed_as": "code/clients/lakehouse_client.py",
+      "sha256": "5095894ce28bc65aa6d186b4063aef25f29f0dcbf2864aa9f5826bd987a0d355"
+    },
+    {
+      "path": "code/clients/livy_client.py",
+      "from": "code\\clients\\livy_client.py",
+      "listed_as": "code/clients/livy_client.py",
+      "sha256": "6197949752365beadbeb6846cef47901165dcf5e1ab9b652389ff5779016da1f"
+    },
+    {
+      "path": "code/clients/notebook_client.py",
+      "from": "code\\clients\\notebook_client.py",
+      "listed_as": "code/clients/notebook_client.py",
+      "sha256": "50c1b6a0ee653ec4254fa70c3615234ea6907c25b0ef8e5c289286824ef6f938"
+    },
+    {
+      "path": "code/clients/workspace_folders.py",
+      "from": "code\\clients\\workspace_folders.py",
+      "listed_as": "code/clients/workspace_folders.py",
+      "sha256": "b456d5eaa5b52eb54660d630f581f6bf80db3491097baef578f36b13e0e30e66"
+    },
+    {
+      "path": "code/core/auth.py",
+      "from": "code\\core\\auth.py",
+      "listed_as": "code/core/auth.py",
+      "sha256": "1a0efe269e46984fc62bedce3dafc4999403bfc5f1404219054d21ec9e6bcd10"
+    },
+    {
+      "path": "code/core/config.py",
+      "from": "code\\core\\config.py",
+      "listed_as": "code/core/config.py",
+      "sha256": "d6ec0e000de2b7f8897157d0c9f211ff3601a8b335153b42381ac8e38ddeb12e"
+    },
+    {
+      "path": "code/core/fabric_http.py",
+      "from": "code\\core\\fabric_http.py",
+      "listed_as": "code/core/fabric_http.py",
+      "sha256": "c3b8e5075dc22aa0aa0c6618f99ef991aee5dd772f5b9d69054d10d6513ceec8"
+    },
+    {
+      "path": "code/core/fabric_read.py",
+      "from": "code\\core\\fabric_read.py",
+      "listed_as": "code/core/fabric_read.py",
+      "sha256": "756d8e39a595f1f642202bd9124f6e2b96e34ee57a4c903de64976cf1996fb91"
+    },
+    {
+      "path": "code/core/sdk.py",
+      "from": "code\\core\\sdk.py",
+      "listed_as": "code/core/sdk.py",
+      "sha256": "56fda6c9a5eaf66f0d9ac1493af2cc901a996186e2f1be5d2cf4e60f625751f0"
+    },
+    {
+      "path": "code/requirements.txt",
+      "from": "generated",
+      "listed_as": "generated: 6 package(s)",
+      "sha256": "a5e1e97eb13f2d58ba4ea4c621f989e0677a3af22cc9ce87045ed1793ec6514b"
+    },
+    {
+      "path": "code/toolkit_path.py",
+      "from": "code\\toolkit_path.py",
+      "listed_as": "code/toolkit_path.py",
+      "sha256": "eec344348743329c2acd2195de02653a52f91bde99c595abb2bc533e0c5d84f6"
+    },
+    {
+      "path": "code/validation/fabric_test.py",
+      "from": "code\\validation\\fabric_test.py",
+      "listed_as": "code/validation/fabric_test.py",
+      "sha256": "41304367a7ee1ab034d35bc98db4b533b45e9a9ffcecc1e21715808ef40326b1"
+    },
+    {
+      "path": "code/validation/test_common.py",
+      "from": "code\\validation\\test_common.py",
+      "listed_as": "code/validation/test_common.py",
+      "sha256": "50e421ecc5a97cd591228293c0d03525ecab2bad1d7ac8da632ef224581cce00"
+    },
+    {
+      "path": "code/validation/test_lakehouse.py",
+      "from": "code\\validation\\test_lakehouse.py",
+      "listed_as": "code/validation/test_lakehouse.py",
+      "sha256": "e003541e994f90d0faefe4e63e9b7f5caeeb88c2c7a51ea0bcc8f22e0ad51ec2"
+    },
+    {
+      "path": "code/validation/test_notebook.py",
+      "from": "code\\validation\\test_notebook.py",
+      "listed_as": "code/validation/test_notebook.py",
+      "sha256": "962e533daef6147a42a5981be6c8a3ef8899aaf8b7c2b3a5c7ba8abe7f179a51"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Deterministic agent-gym fixtures and committed provision.py outputs.
+# Display-layer only: linguist-generated collapses these in GitHub PR diffs and
+# excludes them from language stats. git behavior is unchanged, and -diff is
+# deliberately NOT set — line-level tamper diffs must stay visible for the lint
+# "fixtures left untouched" checks.
+1_agent-gym/*/*/fixture/** linguist-generated=true
+1_agent-gym/*/*/source-data/** linguist-generated=true
+1_agent-gym/cicd/*/repository/** linguist-generated=true
+1_agent-gym/cicd/*/*_spec.json linguist-generated=true
+1_agent-gym/cicd/*/environment_plan.json linguist-generated=true
+1_agent-gym/cicd/*/release_manifest.json linguist-generated=true
+1_agent-gym/cicd/*/release_plan.json linguist-generated=true
+1_agent-gym/cicd/*/release_schedule.json linguist-generated=true
+1_agent-gym/cicd/*/environment_settings.json linguist-generated=true
+1_agent-gym/cicd/*/stage_sheet.json linguist-generated=true
+1_agent-gym/cicd/*/handover_sheet.json linguist-generated=true
+1_agent-gym/cicd/*/press_plan.json linguist-generated=true
+1_agent-gym/cicd/*/scheme_sheet.json linguist-generated=true

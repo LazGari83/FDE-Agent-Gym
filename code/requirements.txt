@@ -1,0 +1,23 @@
+# requirements.txt — Frontier Data Engineer — Trial
+#
+# Only what this bundle's tasks need. The full knowledge base carries more (the
+# open-mirroring, CI/CD, Key Vault and browser lanes each add their own); a bundle
+# that installed those would make a member wait on packages nothing here imports.
+
+# the HTTP transport under every client and every check
+requests
+
+# config.py reads the repo-root .env
+python-dotenv
+
+# every sign-in — a user's interactive flow, or a service principal's credentials
+msal
+
+# the official Fabric SDK under every rebased client — exact pin by design (beta; bumped only behind the repo's gates)
+microsoft-fabric-api==0.1.0b24
+
+# the upload-files step writes source data into OneLake
+azure-storage-file-datalake
+
+# explicit — some images ship cryptography without its cffi runtime dependency
+cffi

@@ -1,0 +1,140 @@
+{
+  "task": "AG-LAK-002",
+  "capabilities": ["LH-C08", "LH-C14", "LH-C23", "LH-C27"],
+  "lakehouse": "AG_LAK_002_Ravensworth",
+  "notebook": "AG-LAK-002-Ravensworth",
+  "defaultSchema": "dbo",
+  "checks": [
+    {
+      "id": "lakehouse-provisioned",
+      "type": "lakehouse-item",
+      "question": "Schema-enabled lakehouse, filed in the Lakehouse folder, SQL endpoint finished provisioning?",
+      "expect": {
+        "schemaEnabled": true,
+        "defaultSchema": "dbo",
+        "sqlEndpoint": "Success",
+        "folder": "Lakehouse"
+      }
+    },
+    {
+      "id": "load-notebook-contract",
+      "type": "notebook-item",
+      "notebook": "AG-LAK-002-Ravensworth",
+      "question": "The load notebook sizes its own session with %%configure, reads and writes by absolute ABFS path, and reports its result through an exit value rather than a print. It must NOT contain the summary logic — that leg belongs to the Livy surface, and its absence here is what proves the two surfaces were genuinely different.",
+      "expect": {
+        "folder": "Lakehouse",
+        "sourceContains": ["%%configure", "abfss://", "notebookutils", "exit"],
+        "sourceLacks": ["saveAsTable", "inferSchema", "!pip", "%pip", "calibration_summary"]
+      }
+    },
+    {
+      "id": "probe-notebook-contract",
+      "type": "notebook-item",
+      "notebook": "AG-LAK-002-Ravensworth-Probe",
+      "question": "The environment probe is a NAMED, KEPT artifact that writes its findings to a table — not a throwaway. It establishes what the runtime provides rather than assuming it, so it installs nothing.",
+      "expect": {
+        "folder": "Lakehouse",
+        "sourceContains": ["runtime_facts", "abfss://"],
+        "sourceLacks": ["!pip", "%pip", "pip install", "subprocess"]
+      }
+    },
+    {
+      "id": "load-notebook-ran-green",
+      "type": "job-run",
+      "notebook": "AG-LAK-002-Ravensworth",
+      "question": "The load notebook was executed over the Jobs API and driven to a verified terminal state — and run at least twice, because the second submission is where Deduped is observed.",
+      "expect": { "status": "Completed", "minRuns": 2 }
+    },
+    {
+      "id": "probe-notebook-ran-green",
+      "type": "job-run",
+      "notebook": "AG-LAK-002-Ravensworth-Probe",
+      "question": "The probe actually ran. An environment report nobody executed is a guess with extra steps.",
+      "expect": { "status": "Completed", "minRuns": 1 }
+    },
+    {
+      "id": "calibration-run-typed",
+      "type": "lakehouse-table",
+      "table": "calibration_run",
+      "schema": "lab",
+      "question": "lab.calibration_run landed from the Jobs-API surface with declared types — deviation_ppm a double and passed a boolean, neither of which a CSV read produces on its own.",
+      "expect": {
+        "columns": [
+          { "name": "run_id", "type": "string" },
+          { "name": "instrument_id", "type": "string" },
+          { "name": "technician", "type": "string" },
+          { "name": "run_date", "type": "date" },
+          { "name": "deviation_ppm", "type": "double" },
+          { "name": "passed", "type": "boolean" }
+        ]
+      }
+    },
+    {
+      "id": "run-not-in-dbo",
+      "type": "lakehouse-table",
+      "table": "calibration_run",
+      "schema": "dbo",
+      "question": "The table did NOT land in the default schema — an unqualified write puts it in dbo, which passes a naive existence check while breaking the contract.",
+      "expect": { "exists": false }
+    },
+    {
+      "id": "q1-all-runs-loaded",
+      "type": "spark-sql",
+      "table": "calibration_run",
+      "schema": "lab",
+      "question": "All twenty calibration runs loaded, and the deviation total is intact — 16.19 ppm across the log, so nothing was rounded, clamped or dropped on the way in.",
+      "sql": "SELECT COUNT(*) AS n, ROUND(SUM(deviation_ppm), 2) AS total FROM {table}",
+      "expect": { "rows": [{ "n": 20, "total": 16.19 }] }
+    },
+    {
+      "id": "q2-summary-from-livy",
+      "type": "spark-sql",
+      "table": "calibration_summary",
+      "schema": "lab",
+      "question": "The per-instrument summary exists and is correct: four instruments, each with its run count, failure count and worst deviation. The load notebook is asserted NOT to contain this logic, so a passing result here means it came from the second execution surface.",
+      "sql": "SELECT instrument_id, runs, failed, ROUND(max_deviation_ppm, 2) AS worst FROM {table} ORDER BY instrument_id",
+      "expect": {
+        "ordered": true,
+        "rows": [
+          { "instrument_id": "INST-A", "runs": 4, "failed": 1, "worst": 1.88 },
+          { "instrument_id": "INST-B", "runs": 5, "failed": 1, "worst": 2.10 },
+          { "instrument_id": "INST-C", "runs": 5, "failed": 1, "worst": 1.55 },
+          { "instrument_id": "INST-D", "runs": 6, "failed": 1, "worst": 3.02 }
+        ]
+      }
+    },
+    {
+      "id": "q3-surfaces-agree",
+      "type": "spark-sql",
+      "question": "The two surfaces agree. Summing the summary's run counts must reproduce the load table's row count — a reconciliation that fails the moment one surface wrote against a stale or partial view of the other's output.",
+      "sql": "SELECT (SELECT SUM(runs) FROM lab.calibration_summary) - (SELECT COUNT(*) FROM lab.calibration_run) AS drift",
+      "expect": { "scalar": 0 }
+    },
+    {
+      "id": "q4-runtime-facts-recorded",
+      "type": "spark-sql",
+      "table": "runtime_facts",
+      "schema": "lab",
+      "question": "The probe recorded exactly the four facts the lab's standard requires, by name. Values are deliberately NOT asserted — they are properties of whatever runtime the tenant is on, and pinning them would make this check a freshness alarm rather than a discipline check. What is asserted is that the agent established them instead of assuming them.",
+      "sql": "SELECT fact_name FROM {table} ORDER BY fact_name",
+      "expect": {
+        "ordered": true,
+        "rows": [
+          { "fact_name": "default_lakehouse" },
+          { "fact_name": "python_version" },
+          { "fact_name": "runtime_jsonschema" },
+          { "fact_name": "spark_version" }
+        ]
+      }
+    },
+    {
+      "id": "q5-facts-have-values",
+      "type": "spark-sql",
+      "table": "runtime_facts",
+      "schema": "lab",
+      "question": "Every recorded fact carries a non-empty value. A facts table with four names and four nulls is the same guess it was meant to replace.",
+      "sql": "SELECT COUNT(*) AS n FROM {table} WHERE fact_value IS NOT NULL AND LENGTH(TRIM(fact_value)) > 0",
+      "expect": { "scalar": 4 }
+    }
+  ]
+}
