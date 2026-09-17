@@ -155,3 +155,61 @@ your own environment, as you go.
 - Kept from the previous entry, unaffected by this correction: the `test_pipeline.py`
   itemType fix (framework code) and the lakehouse operate-framework `Deduped` softening
   (removal of an unverified assertion, not an addition of knowledge).
+
+## [2026-09-17] ingest | AG-LAK-001 (Foundry) converts the lakehouse seed cluster
+- All six `3_wiki/lakehouse/` cluster pages (`prerequisites-and-fit`, `design-framework`,
+  `build-framework`, `operate-framework`, `coding-guidance`, `gotchas`) moved off the seed
+  exemption: `sources:` now cites the rep report, `provenance_notes` dropped, `evidence:
+  unverified` → `mixed` (each page still carries claims this rep did not touch). Inline
+  **Confirmed**/**Proven** tags added at the specific claims this rep exercised.
+- What proved it: `2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md` — 10/10
+  validation checks passed, no triage, first attempt.
+- New: `3_wiki/lakehouse/atoms/index.md` and four rep-proven execution cards — LH-C02
+  (schema-qualified landing), LH-C07 (schema-enabled lakehouse + SQL endpoint), LH-C08
+  (notebook item from cells), LH-C14 (submit/poll/verify-independently). LH-C01 stays
+  argued-only on `design-framework.md`/`prerequisites-and-fit.md` (design-gate, no atom).
+- Corrected: nothing — every claim the rep touched (LH-C01, LH-C02, LH-C07, LH-C08, LH-C10,
+  LH-C14, LH-C27) matched the seed pages exactly as written. This is signal, not a null
+  result: the docstring-migrated seed content held up against a real tenant on first contact.
+- Left open: LH-C06 (path-binding choice under real portability pressure), LH-C12 (Environment
+  item / `%pip` route), LH-C15 (SQL-endpoint metadata sync), LH-C18 (session sizing), LH-C23's
+  non-notebook alternatives, and four-part `%%sql`-style addressing all remain untested —
+  candidates for AG-LAK-002 and later lakehouse reps.
+
+## [2026-09-17] lint | 23 issues found, 22 auto-fixed
+- Deterministic checks run clean: `anchor_check.py` (0 dead anchors), `stale_task_claims.py`
+  (7 gym prose files, no REFUTED/EMPTY-WIKI hits), `gym_run.py --self-test` (0 failures, no
+  checked-in plan/manifest files), `capability_coverage.py --write --check` (lakehouse: 13/13
+  documented, 0 broken capability-id references), `git ls-files | grep __pycache__|.pyc|.pyo`
+  (no tracked build artefacts). `1_agent-gym/lakehouse/AG-LAK-001/task.md` ↔ `validate.json`:
+  all 10 check ids appear in exactly one `Validate:` list, none orphaned either direction; no
+  capability id or mechanism vocabulary leaked into the task bullets. Atom health: all 4
+  lakehouse atoms (LH-C02/07/08/14) cite a valid spec id, cite the same `2_raw/` source as
+  their `derived_from:` cluster pages, and stay well under the ~30-line body budget (21-25
+  lines each). No atom debt — every `proven` capability (LH-C01 excepted, design-gate) has a
+  card.
+- **Auto-fixed (index consistency): 22 dead rows in `3_wiki/index.md` marked `[MISSING]`.**
+  Every page row under `## azure-app`, `## capacity`, `## cicd`, `## data-agent`, `## graph`,
+  `## key-vault`, `## ontology`, `## openmirror`, `## pipelines` points at a file that does not
+  exist anywhere in this repo's git history (`git log --all --diff-filter=A --name-only --
+  '3_wiki/*.md'` shows only the `lakehouse` cluster + `index.md` + `log.md` were ever
+  committed). Rows left in place per convention, not deleted — maintainer's call.
+- **Report only — not auto-fixed:** the same 9 sections' intro paragraphs link a "Toolkit"
+  (`code/clients/*.py`, `code/builders/*.py`) and a "Spec" (`0_admin/capabilities/<topic>.md`)
+  that are equally absent — `code/` ships only the lakehouse clients (`lakehouse_client.py`,
+  `notebook_client.py`, `livy_client.py`, `workspace_folders.py`) plus core infra, and
+  `0_admin/capabilities/` ships only `lakehouse.md`. `1_agent-gym/` has empty (`.gitkeep`-only)
+  folders for `cicd`, `ingestion`, `key-vault`, `openmirror`, `pipelines`, `testing`; no
+  `azure-app`, `data-agent`, `graph`, or `ontology` folder exists there at all. This directly
+  contradicts this same file's own `## Instructions` section ("This index is mostly empty...
+  `lakehouse` is filled in already, as a worked example") and CLAUDE.md's stated fresh-clone
+  design ("the wiki holds one seed topic"). The 2026-08-20 `refactor` entry above claims "22
+  new seed pages across [9 topics]" — that work is not present in this repository's single
+  commit (`9f193ea`). **Withdrawing that claim rather than deleting it**: the entry stands as
+  written above (append-only), but per that same entry's own count (2+2+3+2+2+3+3+3+2 = 22)
+  it matches exactly the 22 rows just marked `[MISSING]` here — strong evidence the described
+  work happened in a different environment/branch and never reached this repo's history.
+- Left open, for the maintainer: decide per topic whether to (a) delete the phantom section
+  from `index.md` and its files-that-never-existed claim from the 2026-08-20 log entry's
+  practical effect, or (b) actually port the described seed content from wherever it was
+  produced. Until then, treat every `[MISSING]` row as documentation debt, not knowledge.

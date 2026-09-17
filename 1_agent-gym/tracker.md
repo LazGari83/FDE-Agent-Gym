@@ -4,13 +4,13 @@
 
 **Exit 0 does not mean every check ran.** A check gated on a credential this repository cannot hold (`requiresEnv`, e.g. a delegated real-user token) is SKIPPED when the credential is absent — parked, not failed, and never counted as a pass. A passed row therefore means "nothing asserted failed"; which assertions were never made is recorded in the task's gym rep report, and a parked leg is not evidence.
 
-**Overall: 0 / 2 tasks passed** (lakehouse 0/2). Totals come from the task folders and completions from your `2_raw/gym-rep-reports/` reports, so a fresh clone reads 0. Refresh with `python .claude/skills/check-training-progress/tracker_sync.py --write`; never hand-edit the counts.
+**Overall: 1 / 2 tasks passed** (lakehouse 1/2). Totals come from the task folders and completions from your `2_raw/gym-rep-reports/` reports, so a fresh clone reads 0. Refresh with `python .claude/skills/check-training-progress/tracker_sync.py --write`; never hand-edit the counts.
 
-## Lakehouse (`AG-LAK`) — 0 / 2
+## Lakehouse (`AG-LAK`) — 1 / 2
 
 | Task | Name | Status | Passed | Report |
 |---|---|---|---|---|
-| AG-LAK-001 | Foundry | ⬜ not started | — | — |
+| AG-LAK-001 | Foundry | ✅ passed | 2026-09-16 | [report](../2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md) |
 | AG-LAK-002 | Ravensworth | ⬜ not started | — | — |
 
 ## Status key

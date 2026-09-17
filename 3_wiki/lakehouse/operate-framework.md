@@ -5,12 +5,12 @@ category: operate-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C14, LH-C15]
-updated: 2026-08-20
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page** — see [prerequisites-and-fit](prerequisites-and-fit.md) for why these six pages cite nothing, and what converts them."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse — operate framework
@@ -32,6 +32,9 @@ assert latest["status"] == "Completed"
 3. **The data is the proof.** Re-read from an independent session.
 
 Terminal states: `Completed` · `Failed` · `Cancelled` · `Deduped` (treat as a no-op if it appears; whether Fabric ever fires it — for scheduled or pipeline invocations — is unverified, and on-demand runs are never deduplicated, below). Only the first is green. Live states: `NotStarted` · `InProgress`.
+
+**Confirmed** (AG-LAK-001): single run reached `Completed` in 61.1s; independent Livy re-read
+matched all five contract checks. Atom: [LH-C14](atoms/LH-C14.md).
 
 ## Assert the *latest* run
 

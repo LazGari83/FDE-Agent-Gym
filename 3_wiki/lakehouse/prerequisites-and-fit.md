@@ -5,12 +5,12 @@ category: prerequisites-and-fit
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C01, LH-C12, LH-C27]
-updated: 2026-08-18
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page.** Every other wiki page cites a file in `2_raw/`; the six lakehouse cluster pages ship before your first rep, when `2_raw/` is empty by design. `evidence: unverified` is *your* position, not a claim about the content — treat it as a baseline to test. AG-LAK-001 and AG-LAK-002 are what convert it: when they land, `fabric-ingest` rewrites these pages from your own gym rep reports and the citations appear."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse + notebook — prerequisites and fit
@@ -36,6 +36,8 @@ python .claude/skills/execute-gym-rep/preflight_probe.py --task AG-LAK-001
 
 Read the three exit codes as three different answers: `0` clear · `1` a prerequisite is provably absent · **`2` inconclusive** — nothing failed, something could not be decided from here (most often because the workspace has no lakehouse yet, which is the normal state at the start of a rep that creates one). Treating a `2` as a failure parks a task that would have run.
 
+**Proven** (AG-LAK-001): the `fabric-auth` / `capacity` / `spark-capacity` baseline passed clean before the first tenant call.
+
 ## Fit — is a notebook the right tool?
 
 A Spark notebook costs a session start (**~30–40 s** before any work) plus capacity. Data volume alone rarely justifies it: a load of eight rows can still be the right call when the requirement is reproducibility rather than throughput.
@@ -57,11 +59,20 @@ Choose something else when:
 
 Reaching for Spark reflexively is the failure mode this test exists to catch — a build that later goes green does not retire the question.
 
+**Proven** (AG-LAK-001, LH-C01): notebook chosen on all three grounds — rebuildable
+`notebook-content.py`, real transformation (explicit typing + schema qualification), file-drop
+source. No alternative surface (pipeline copy, shortcut, Livy-only) would have produced a
+git-tracked, redeployable definition that also enforces the `retail`-vs-`dbo` contract.
+
 ## Establish the runtime; do not assume it (LH-C27)
 
 The runtime ships a great deal, and **checking costs one Livy session** (`importlib.import_module` over the candidate names) against a needless install — or, if version-pinned, a downgrade the platform did not ask for.
 
 `notebookutils.runtime.context` carries `defaultLakehouseId` · `defaultLakehouseName` · `defaultLakehouseWorkspaceId` · `defaultLakehouseWorkspaceName` when the job supplies a `defaultLakehouse`.
+
+**Proven** (AG-LAK-001): `defaultLakehouseWorkspaceId` / `defaultLakehouseId` were populated
+cleanly because `run-notebook` attached the lakehouse at submission (`attachLakehouse: true`
+default) — no separate lookup needed.
 
 Two constraints follow, and both are fit questions rather than build details:
 

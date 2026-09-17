@@ -5,12 +5,12 @@ category: design-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C02, LH-C06, LH-C10, LH-C14, LH-C18, LH-C23]
-updated: 2026-08-18
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page** — see [prerequisites-and-fit](prerequisites-and-fit.md) for why these six pages cite nothing, and what converts them."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse — design framework
@@ -26,6 +26,9 @@ Verify from `properties.defaultSchema` on a GET — the flag you sent is never e
 ## 2. Which schema the table lands in (LH-C02)
 
 `dbo` is the default schema, and **an unqualified write lands there** while still passing a naive existence check. If the contract names a schema, the design has two assertions in it, not one: the table is present in the named schema **and** absent from `dbo`.
+
+**Proven** (AG-LAK-001): both assertions passed against `retail.product` on the first run.
+Atom: [LH-C02](atoms/LH-C02.md).
 
 ## 3. How storage is addressed
 
@@ -43,6 +46,10 @@ Attachment is simpler and correct for a single-lakehouse job. Choose absolute pa
 ## 4. Explicit schema, or inference
 
 Inference is a runtime decision made on the data that happened to arrive. Declare the schema explicitly wherever the table is a contract: a column that silently arrives as `string` instead of `double` is a defect that appears downstream, long after the run went green.
+
+**Proven** (AG-LAK-001): an explicit `StructType` (string/string/string/double/int) on CSV
+read caught nothing wrong here, but is what let `SUM(unit_price)`/`SUM(in_stock)` land as the
+correct numeric types rather than strings.
 
 ## 5. Which execution surface
 

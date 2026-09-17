@@ -5,12 +5,12 @@ category: build-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C07, LH-C08, LH-C14]
-updated: 2026-08-20
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page** — see [prerequisites-and-fit](prerequisites-and-fit.md) for why these six pages cite nothing, and what converts them."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse — build framework
@@ -33,6 +33,9 @@ item = lh.create(name, folder_id=folder_id, enable_schemas=True)   # 201; re-GET
 - **Hyphens and spaces → `400 InvalidInput`** ("DisplayName is Invalid for ArtifactType"). The rule is **per item type** — a notebook beside it accepts hyphens.
 - **The create response carries no `properties`.** Paths and the endpoint block need the follow-up GET; `create()` does it for you.
 - **Assert `properties.defaultSchema`** to confirm you got the schema-enabled variant.
+
+**Proven** (AG-LAK-001): `AG_LAK_001_Foundry` created and endpoint reached `Success` inside
+the single `lakehouse` step, 28.8s total. Atom: [LH-C07](atoms/LH-C07.md).
 
 ## P3 — SQL endpoint
 
@@ -61,6 +64,9 @@ nb = NotebookClient(ws).create(name, py_source=py, folder_id=folder_id)   # 202 
 - **Assert with `get_source()`, never on the create's status.** The prologue is the only thing validated, so a payload that creates successfully can still be empty — see [gotchas](gotchas.md).
 - **No insert-a-cell or run-one-cell API.** An edit is a whole-file rebuild plus `update_definition()`.
 
+**Proven** (AG-LAK-001): `AG-LAK-001-Foundry` created in one call; offline `--lint-source`
+matched the live `get_source()` check exactly. Atom: [LH-C08](atoms/LH-C08.md).
+
 ## P5 — Run it
 
 Submit over the Jobs API and poll to a terminal state — [operate-framework](operate-framework.md) covers what the run does and does not tell you.
@@ -68,3 +74,6 @@ Submit over the Jobs API and poll to a terminal state — [operate-framework](op
 ## P6 — Verify from an independent session
 
 `Completed` is a process exit, not a data assertion. Re-read the table from a session that did not write it, and check the values the contract names — row count, distinct keys, a known row, and **absence from `dbo`** where a named schema was required.
+
+**Proven** (AG-LAK-001): run reached `Completed` in 61.1s; a fresh Livy session re-read
+`retail.product` and matched all five `spark-sql` checks. Atom: [LH-C14](atoms/LH-C14.md).

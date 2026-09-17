@@ -5,12 +5,12 @@ category: coding-guidance
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C02, LH-C08, LH-C09, LH-C12]
-updated: 2026-08-20
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page** — see [prerequisites-and-fit](prerequisites-and-fit.md) for why these six pages cite nothing, and what converts them."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse — coding guidance
@@ -35,6 +35,10 @@ Parameters inject only into a cell whose *delimiter* is `# PARAMETERS CELL ***`.
 - The delimiter grammar — `# Fabric notebook source` header, notebook-level METADATA block, then a CELL block per cell each followed by its own METADATA block — is what the notebook editor round-trips; get it wrong and the item is created but mis-parsed.
 - `parameters_cell` must name a **code** cell. The tag is carried by the delimiter, not the METADATA block, and survives create → getDefinition.
 - `update_definition()` sends the `.platform` part only with `?updateMetadata=true` — supply a display name to update item metadata; omit it and the item's metadata is left alone.
+
+**Confirmed** (AG-LAK-001): one markdown cell + one code cell, no parameters cell, built via
+`notebook_content_py()` — offline `--lint-source` matched the live `get_source()` check
+exactly. Atom: [LH-C08](atoms/LH-C08.md).
 
 ## Run submission
 
@@ -114,6 +118,9 @@ DeltaTable.forPath(spark, TABLE)               # takes the ABFS path directly
 - **`Tables/{schema}/{table}` auto-registers on a schema-enabled lakehouse** — no `CREATE SCHEMA`, no `CREATE TABLE … LOCATION`, no attachment. The directory *is* the schema.
 - **Existence test is `DeltaTable.isDeltaTable(spark, path)`**, not `catalog.tableExists` — with no attachment there is no catalog to ask.
 - **Convert the item API's `https://onelake.dfs…` form once at the boundary** (`LakehouseClient.abfss_paths()`); it is not Spark-writable, and the raw property must never reach Spark.
+
+**Confirmed** (AG-LAK-001): `abfss://{workspace_id}@onelake.dfs.fabric.microsoft.com/{lakehouse_id}/Tables/retail/product`
+written via `.save()`, auto-registered, no `CREATE SCHEMA`. Atom: [LH-C02](atoms/LH-C02.md).
 
 ## Livy — Spark without a notebook
 

@@ -5,12 +5,12 @@ category: gotchas
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C02, LH-C07, LH-C08, LH-C14, LH-C27]
-updated: 2026-08-20
-fabric_release: 2026-08
+updated: 2026-09-16
+fabric_release: 2026-09
 status: current
-evidence: unverified
-sources: []
-provenance_notes: "**Seed page** — see [prerequisites-and-fit](prerequisites-and-fit.md) for why these six pages cite nothing, and what converts them. The trap register is the page a rep is most likely to *correct*: when one of these behaves differently in your tenant, that contradiction is the finding worth writing up."
+evidence: mixed
+sources:
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
 ---
 
 # Lakehouse — gotchas
@@ -23,6 +23,9 @@ The trap register. Each entry is a thing that looks like it worked.
 - **A rejected environment create still reserves the name.** A hyphen is rejected at create — and a retry under the same name then answers `409 ItemDisplayNameNotAvailableYet` on the very name the 400 just refused. Validate the name before sending, not after the 400.
 - **Schema-enabled is not the API default, and cannot be changed later.** A bare create silently yields the legacy schemaless variant. The flag you sent is never echoed back, so verify `properties.defaultSchema` on a GET rather than trusting your own request.
 - **The create response carries no `properties`.** Paths and the SQL endpoint block only exist after a follow-up GET.
+
+**Confirmed** (AG-LAK-001): schema-enabled `true`, `defaultSchema=dbo`, endpoint `Success`
+only visible after the client's follow-up GET.
 
 ## Notebook definitions
 
@@ -39,6 +42,9 @@ The trap register. Each entry is a thing that looks like it worked.
 - **GUIDs are rejected in four-part names** (`DoesNotExistException: Artifact not found`) — display names only, the inverse of every other Fabric surface.
 - **The `https://onelake.dfs…` form the item API returns is not Spark-writable.**
 - **`saveAsTable` addresses the catalog**, so it resolves against the attached default lakehouse — not the path you meant.
+
+**Confirmed** (AG-LAK-001): `.save(TABLE)` on the absolute ABFS path landed `retail.product`
+cleanly, no `dbo` fallback. Atom: [LH-C02](atoms/LH-C02.md).
 
 ## Running
 

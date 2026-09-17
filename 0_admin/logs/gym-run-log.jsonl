@@ -1,0 +1,6 @@
+{"ts": 1789556630.529, "iso": "2026-09-16T11:03:50Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "start"}
+{"ts": 1789556651.408, "iso": "2026-09-16T11:04:11Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "phase", "phase": "classify"}
+{"ts": 1789556747.481, "iso": "2026-09-16T11:05:47Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "phase", "phase": "draft"}
+{"ts": 1789556827.272, "iso": "2026-09-16T11:07:07Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "phase", "phase": "plan"}
+{"ts": 1789557018.495, "iso": "2026-09-16T11:10:18Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "validate", "seconds": 70.5, "exit": 0}
+{"ts": 1789557110.728, "iso": "2026-09-16T11:11:50Z", "task": "AG-LAK-001", "run": "AG-LAK-001@2026-09-16T11:03:50Z", "event": "end", "status": "passed"}
