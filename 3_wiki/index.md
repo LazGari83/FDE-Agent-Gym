@@ -46,129 +46,33 @@ Toolkit: [`code/clients/lakehouse_client.py`](../code/clients/lakehouse_client.p
 Spec: [`0_admin/capabilities/lakehouse.md`](../0_admin/capabilities/lakehouse.md).
 Practice in [`1_agent-gym/lakehouse/`](../1_agent-gym/lakehouse/index.md).
 
-**First rep landed 2026-09-16 (AG-LAK-001).** The six-page cluster shape is the worked
+**First rep landed 2026-09-16 (AG-LAK-001); second landed 2026-09-18 (AG-LAK-002 — concurrent
+submission + a second execution surface).** The six-page cluster shape is the worked
 example: `prerequisites-and-fit` · `design-framework` · `build-framework` ·
 `operate-framework` · `coding-guidance` · `gotchas` — the first four following the lifecycle an
 agent walks (is this the right tool → decide the shape → build it → run it once it is live),
 with `coding-guidance` the code for all of them and `gotchas` the trap register across all of
-them. AG-LAK-001 confirmed every claim it touched (LH-C01 argued, LH-C02/LH-C07/LH-C08/LH-C10/LH-C27
-exercised) with no corrections, so all six pages now carry real `sources:` and `evidence: mixed`
-(claims outside this rep's scope — LH-C06, LH-C12, LH-C15, LH-C18, LH-C23's alternatives — remain
-untested). [`atoms/`](lakehouse/atoms/index.md) holds the first four rep-proven execution cards:
-LH-C02, LH-C07, LH-C08, LH-C14.
+them. AG-LAK-002 re-proved LH-C08/LH-C14 with no deviation, exercised LH-C23 concretely
+(notebook load + notebook probe + Livy summary — the design-framework split, applied), and
+confirmed a draft LH-C27 atom; it also softened the "concurrent runs always collide" claim to
+conditional (two concurrent identical `overwrite` submissions both completed clean). Claims
+outside either rep's scope — LH-C06, LH-C12, LH-C15, LH-C18 — remain untested.
+[`atoms/`](lakehouse/atoms/index.md) holds five rep-proven execution cards: LH-C02, LH-C07,
+LH-C08, LH-C14, LH-C27.
 
 | Page                                                              | Type       | Evidence   | Summary                                                                                                              | Updated    | Release |
 | ----------------------------------------------------------------- | ---------- | ---------- | -------------------------------------------------------------------------------------------------------------------- | ---------- | ------- |
-| [Prerequisites and fit](lakehouse/prerequisites-and-fit.md)       | capability | mixed | Two auth planes, the preflight probe that proves your tenant, the notebook-vs-alternative fit test, establishing the runtime, and what the API plane cannot do. | 2026-09-16 | 2026-09 |
-| [Design framework](lakehouse/design-framework.md)                 | capability | mixed | The decisions taken before the first create call — several irreversible: schema-enabled, which schema, attached vs absolute addressing, execution surface. | 2026-09-16 | 2026-09 |
-| [Build framework](lakehouse/build-framework.md)                   | capability | mixed | Ordered P1–P6: folder, schema-enabled lakehouse, SQL endpoint, notebook item, run, verify from an independent session.| 2026-09-16 | 2026-09 |
-| [Operate framework](lakehouse/operate-framework.md)               | capability | mixed | Driving a run to a verified terminal state, the three degrees of acknowledgement, concurrency collisions, run ledgers, the per-write SQL endpoint metadata sync, shortcuts once live. | 2026-09-16 | 2026-09 |
+| [Prerequisites and fit](lakehouse/prerequisites-and-fit.md)       | capability | mixed | Two auth planes, the preflight probe that proves your tenant, the notebook-vs-alternative fit test, establishing the runtime, and what the API plane cannot do. | 2026-09-18 | 2026-09 |
+| [Design framework](lakehouse/design-framework.md)                 | capability | mixed | The decisions taken before the first create call — several irreversible: schema-enabled, which schema, attached vs absolute addressing, execution surface. | 2026-09-18 | 2026-09 |
+| [Build framework](lakehouse/build-framework.md)                   | capability | mixed | Ordered P1–P6: folder, schema-enabled lakehouse, SQL endpoint, notebook item, run, verify from an independent session.| 2026-09-18 | 2026-09 |
+| [Operate framework](lakehouse/operate-framework.md)               | capability | mixed | Driving a run to a verified terminal state, the three degrees of acknowledgement, concurrency (collision is conditional, not guaranteed), run ledgers, the per-write SQL endpoint metadata sync, shortcuts once live. | 2026-09-18 | 2026-09 |
 | [Coding guidance](lakehouse/coding-guidance.md)                   | capability | mixed | Call shapes: `notebook_content_py()`, run submission (parameters/defaultLakehouse/environment), abfss paths, Livy `kind="pyspark"`, environment items, shortcuts, T-SQL over pyodbc. | 2026-09-16 | 2026-09 |
-| [Gotchas](lakehouse/gotchas.md)                                   | capability | mixed | Trap register: per-type name rules (and name reservation), prologue-only validation, `dbo` landings, SQL-endpoint staleness, shortcut conflict/path traps, Livy Scala default. | 2026-09-16 | 2026-09 |
-
-## azure-app
-
-The app-serving surface: an API-for-GraphQL derived from the ontology, SPN-callable from application code.
-
-Toolkit: [`code/clients/graphql_api_client.py`](../code/clients/graphql_api_client.py) + [`code/builders/graphql_api_generator.py`](../code/builders/graphql_api_generator.py). Spec: [`0_admin/capabilities/azure-app.md`](../0_admin/capabilities/azure-app.md). Practice in [`1_agent-gym/azure-app/`](../1_agent-gym/azure-app/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Build framework](azure-app/build-framework.md) **[MISSING]** | capability | unverified | The ontology→API-for-GraphQL derivation rules (`fieldMappings` required, `targetObject` in source format, cardinality from the contextualization's table), SQLEndpoint-id resolution, idempotent `sync_api`, querying `/graphql`. | 2026-08-20 | 2026-08 |
-| [Gotchas](azure-app/gotchas.md) **[MISSING]** | capability | unverified | Trap register: `sourceItemId` wants the SQLEndpoint id never the lakehouse id, display-name charset → `400 InvalidInput`, `Query_by_pk` silent no-op, LRO-stub visibility, `create_api` takes no folderId. | 2026-08-20 | 2026-08 |
-
-## capacity
-
-Fabric capacities on the **ARM control plane** — lifecycle, suspend/resume, and the paid-tier discrimination paid-only items need.
-
-Toolkit: [`code/clients/capacity.py`](../code/clients/capacity.py). Spec: [`0_admin/capabilities/capacity.md`](../0_admin/capabilities/capacity.md). No gym tasks yet — a declared gap.
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](capacity/coding-guidance.md) **[MISSING]** | capability | unverified | `CapacityClient` call shapes — create/update/suspend/resume/wait, resource-group discovery, existence probing, and `is_paid_tier`. | 2026-08-20 | 2026-08 |
-| [Gotchas](capacity/gotchas.md) **[MISSING]** | capability | unverified | Trap register: wrong-plane addressing, create-silently-becomes-resume (changed SKU/region/admins NOT applied), ~40 s settle, admin-gated Fabric-API visibility, paid-tier SKU discrimination. | 2026-08-20 | 2026-08 |
-
-## cicd
-
-Promotion three ways — git integration, deployment pipelines, `fabric-cicd` — plus connections, variable libraries, and workspace lifecycle.
-
-Toolkit: [`code/clients/git_client.py`](../code/clients/git_client.py) · [`deployment_client.py`](../code/clients/deployment_client.py) · [`variable_library_client.py`](../code/clients/variable_library_client.py) · [`connection_client.py`](../code/clients/connection_client.py) · [`workspace_client.py`](../code/clients/workspace_client.py). Spec: [`0_admin/capabilities/cicd.md`](../0_admin/capabilities/cicd.md). Practice in [`1_agent-gym/cicd/`](../1_agent-gym/cicd/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](cicd/coding-guidance.md) **[MISSING]** | capability | unverified | Call shapes for the whole delivery toolkit — connection→connect→initialize sequence, selective commits, positional promotion, variable-library definitions, connection payloads, fabric-cicd publish flags. | 2026-08-20 | 2026-08 |
-| [Operate framework](cicd/operate-framework.md) **[MISSING]** | capability | unverified | Running promotions once live — the three-mechanism comparison, per-item verification via `executionPlan.steps[]`, the deploy note as sole audit record, post-arrival value-set selection, the four-delete blast-radius table. | 2026-08-20 | 2026-08 |
-| [Gotchas](cicd/gotchas.md) **[MISSING]** | capability | unverified | Trap register across all three promotion mechanisms — GitHub/ADO credential asymmetry, `mode: All` failing by succeeding, positional stages, deploys that succeed against nothing, silent fabric-cicd skips, non-unique connection names. | 2026-08-20 | 2026-08 |
-
-## data-agent
-
-The Fabric **data agent** item — definition round-trips, publishing, and the paid-capacity gate.
-
-Toolkit: [`code/clients/data_agent_client.py`](../code/clients/data_agent_client.py). Spec: [`0_admin/capabilities/data-agent.md`](../0_admin/capabilities/data-agent.md). Practice in [`1_agent-gym/data-agent/`](../1_agent-gym/data-agent/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](data-agent/coding-guidance.md) **[MISSING]** | capability | unverified | Collection/type addressing, the `Files/Config` part-path map (both stages in one definition), whole-document `build_definition`/`update_definition`, and the synchronous `staging/publish` call. | 2026-08-20 | 2026-08 |
-| [Gotchas](data-agent/gotchas.md) **[MISSING]** | capability | unverified | Trap register: trial-capacity refusal (paid F2+), updateDefinition-does-not-publish, the `staging/publish` 404 trap, runtime bound at publish, overwrite atomicity, delete ≠ decommission. | 2026-08-20 | 2026-08 |
-
-## graph
-
-Querying the graph an ontology projects — the Fabric IQ pair's second half (shares the [`ontology`](#ontology) spec).
-
-Toolkit: [`code/clients/graph_client.py`](../code/clients/graph_client.py). Spec: [`0_admin/capabilities/ontology.md`](../0_admin/capabilities/ontology.md). Practice in [`1_agent-gym/ontology/`](../1_agent-gym/ontology/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](graph/coding-guidance.md) **[MISSING]** | capability | unverified | Resolving the auto-provisioned `<Ontology>_graph_<hash>` by prefix, `getQueryableGraphType` schema discovery, GQL `executeQuery`, and the 200-vs-202 refresh polling contract. | 2026-08-20 | 2026-08 |
-| [Gotchas](graph/gotchas.md) **[MISSING]** | capability | unverified | Trap register: graph not named after the ontology, aliased edge endpoints, push-does-not-refresh, two refresh success shapes, beta query surfaces. | 2026-08-20 | 2026-08 |
-
-## key-vault
-
-Azure Key Vault on both planes — vault lifecycle over ARM, data-plane RBAC grants, secrets.
-
-Toolkit: [`code/clients/key_vault.py`](../code/clients/key_vault.py). Spec: [`0_admin/capabilities/key-vault.md`](../0_admin/capabilities/key-vault.md). Practice in [`1_agent-gym/key-vault/`](../1_agent-gym/key-vault/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](key-vault/coding-guidance.md) **[MISSING]** | capability | unverified | Two planes/two token audiences, vault create payload, data-plane RBAC grants with role GUIDs, and secret set/get/list call shapes with their error semantics. | 2026-08-20 | 2026-08 |
-| [Operate framework](key-vault/operate-framework.md) **[MISSING]** | capability | unverified | Secret lifecycle post-live: rotation as re-PUT with per-version attributes, the expiry sweep (absent `exp` is a finding), and delete→purge→poll decommission. | 2026-08-20 | 2026-08 |
-| [Gotchas](key-vault/gotchas.md) **[MISSING]** | capability | unverified | Trap register: access-policy default at create, unenforced 201 grants (~12 s window), object-vs-app id, soft-delete name retention, subscription-scope purge, 403-vs-404-vs-DNS signals. | 2026-08-20 | 2026-08 |
-
-## ontology
-
-Fabric IQ ontology design and build — definition parts, bindings, contextualizations, atomic pushes (the pair's first half; [`graph`](#graph) queries what this projects).
-
-Toolkit: [`code/clients/ontology_client.py`](../code/clients/ontology_client.py) + [`code/builders/definition_builder.py`](../code/builders/definition_builder.py) + [`lakehouse_sync.py`](../code/builders/lakehouse_sync.py). Spec: [`0_admin/capabilities/ontology.md`](../0_admin/capabilities/ontology.md). Practice in [`1_agent-gym/ontology/`](../1_agent-gym/ontology/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Design framework](ontology/design-framework.md) **[MISSING]** | capability | unverified | Definition part layout, 64-bit-string vs GUID id discipline, the six value types with their Spark mappings, and the binding/contextualization shapes fixed before the first push. | 2026-08-20 | 2026-08 |
-| [Coding guidance](ontology/coding-guidance.md) **[MISSING]** | capability | unverified | Call shapes for `OntologyClient`, the config-driven build flow (`build_from_config` → tables → bindings → one atomic push), and `sync_all_entities` for evolving a live model. | 2026-08-20 | 2026-08 |
-| [Gotchas](ontology/gotchas.md) **[MISSING]** | capability | unverified | Trap register: the unreadable `400 ALMOperationImportFailed` and its two causes, `BigInt`-not-`Integer`, whole-document overwrite, `dbo`/`ont_*` defaults, contextEntity-defaults-to-target. | 2026-08-20 | 2026-08 |
-
-## openmirror
-
-Open mirroring end to end: the landing-zone file protocol a producer writes, and the Mirrored Database item that replicates it into Delta.
-
-Toolkit: [`code/clients/mirror_client.py`](../code/clients/mirror_client.py) + [`code/builders/landing_zone.py`](../code/builders/landing_zone.py). Spec: [`0_admin/capabilities/openmirror.md`](../0_admin/capabilities/openmirror.md). Practice in [`1_agent-gym/openmirror/`](../1_agent-gym/openmirror/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](openmirror/coding-guidance.md) **[MISSING]** | capability | unverified | GenericMirror definition and endpoints, the landing-zone protocol (folders create tables, `_metadata.json`, 20-digit sequential files, `__rowMarker__`), the declare·coerce·canonicalize parquet rule, and the delimited-text contract. | 2026-08-20 | 2026-08 |
-| [Operate framework](openmirror/operate-framework.md) **[MISSING]** | capability | unverified | Post-live doctrine: stopped-table triage on the `error` object / `lastSyncDateTime` / landing-zone backlog, drop-and-recreate recovery, landing-zone transience (~7-day purge), and live-mirror change rules. | 2026-08-20 | 2026-08 |
-| [Gotchas](openmirror/gotchas.md) **[MISSING]** | capability | unverified | The silent-failure register: no auto-start, `MirroringDefinitionMissing`, `Replicating` on a stopped table, cumulative `processedRows`, the snapshot boundary, write-once `keyColumns`, `SchemaMergeFailure` triggers. | 2026-08-20 | 2026-08 |
-
-## pipelines
-
-Data Pipelines over REST — definition round-trips, schedules, and Jobs-API runs.
-
-Toolkit: [`code/clients/pipeline_client.py`](../code/clients/pipeline_client.py). Spec: [`0_admin/capabilities/pipelines.md`](../0_admin/capabilities/pipelines.md). Practice in [`1_agent-gym/pipelines/`](../1_agent-gym/pipelines/index.md).
-
-| Page | Type | Evidence | Summary | Updated | Release |
-| ---- | ---- | ---- | ------- | ------- | ------- |
-| [Coding guidance](pipelines/coding-guidance.md) **[MISSING]** | capability | unverified | Definition parts payload, GET→merge→POST surgical patching, Job Scheduler schedules (`jobType=Pipeline`, Cron-only), Jobs-API run trigger/polling, and the `queryactivityruns` shape. | 2026-08-20 | 2026-08 |
-| [Gotchas](pipelines/gotchas.md) **[MISSING]** | capability | unverified | The trap register: `DefaultJob` → `400 InvalidJobType`, schedule stacking, past `startDateTime` instant fire, full-replace `updateDefinition`, ambiguous `Failed`, vacuous empty activity-run windows. | 2026-08-20 | 2026-08 |
+| [Gotchas](lakehouse/gotchas.md)                                   | capability | mixed | Trap register: per-type name rules (and name reservation), prologue-only validation, `dbo` landings, SQL-endpoint staleness, shortcut conflict/path traps, Livy Scala default, conditional run collisions. | 2026-09-18 | 2026-09 |
 
 ## your other topics
 
-Folders are already in place for `capacity` · `cicd` · `ingestion` · `key-vault` · `openmirror` · `pipelines` · `testing`. Each gets a section here — copied from the `lakehouse` shape above — once it has a page. Delete this whole section when they all do.
+Folders are already in place for `cicd` · `ingestion` · `key-vault` · `openmirror` · `pipelines`
+(under `1_agent-gym/`); `azure-app` · `capacity` · `data-agent` · `graph` · `ontology` · `testing`
+are declared in `CLAUDE.md`'s topic table but have no gym folder, spec, or code toolkit in this
+repo yet. Each gets a section here — copied from the `lakehouse` shape above — once it has a
+real page. Delete this whole section when they all do.

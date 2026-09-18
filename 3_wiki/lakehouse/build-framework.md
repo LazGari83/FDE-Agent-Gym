@@ -5,12 +5,13 @@ category: build-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C07, LH-C08, LH-C14]
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: mixed
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 ---
 
 # Lakehouse — build framework
@@ -67,6 +68,8 @@ nb = NotebookClient(ws).create(name, py_source=py, folder_id=folder_id)   # 202 
 **Proven** (AG-LAK-001): `AG-LAK-001-Foundry` created in one call; offline `--lint-source`
 matched the live `get_source()` check exactly. Atom: [LH-C08](atoms/LH-C08.md).
 
+**Re-proven** (AG-LAK-002): two notebook items in the same rep, each created in one call.
+
 ## P5 — Run it
 
 Submit over the Jobs API and poll to a terminal state — [operate-framework](operate-framework.md) covers what the run does and does not tell you.
@@ -77,3 +80,7 @@ Submit over the Jobs API and poll to a terminal state — [operate-framework](op
 
 **Proven** (AG-LAK-001): run reached `Completed` in 61.1s; a fresh Livy session re-read
 `retail.product` and matched all five `spark-sql` checks. Atom: [LH-C14](atoms/LH-C14.md).
+
+**Re-proven, concurrency case** (AG-LAK-002): two concurrent submissions, second issued before
+the first was polled — both reached `Completed`, no collision this time; see
+[operate-framework](operate-framework.md) ("Concurrency").

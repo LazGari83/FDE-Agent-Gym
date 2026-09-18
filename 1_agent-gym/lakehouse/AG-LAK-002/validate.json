@@ -42,7 +42,7 @@
       "id": "load-notebook-ran-green",
       "type": "job-run",
       "notebook": "AG-LAK-002-Ravensworth",
-      "question": "The load notebook was executed over the Jobs API and driven to a verified terminal state — and run at least twice, because the second submission is where Deduped is observed.",
+      "question": "The load notebook was executed over the Jobs API and driven to a verified terminal state — and run at least twice, on-demand runs are never deduplicated (two distinct job-instance ids every time); the point of the second run is to observe whether the concurrent writes collide, which is conditional, not guaranteed.",
       "expect": { "status": "Completed", "minRuns": 2 }
     },
     {

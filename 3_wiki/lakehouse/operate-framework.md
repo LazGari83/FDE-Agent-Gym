@@ -5,12 +5,13 @@ category: operate-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C14, LH-C15]
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: mixed
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 ---
 
 # Lakehouse — operate framework
@@ -42,9 +43,9 @@ The API returns instances unordered. An older green run will otherwise mask a ne
 
 ## Concurrency
 
-**On-demand runs are not deduplicated.** Concurrent identical submissions produce real, separate Spark sessions, and they **collide** over the same Delta path — one submission may lose the race; record the exact error your tenant returns. Idempotence and concurrency control are the caller's job: poll to terminal before resubmitting.
+**On-demand runs are not deduplicated.** Concurrent identical submissions produce real, separate Spark sessions — confirmed twice now (AG-LAK-001, AG-LAK-002), always as distinct job-instance ids. Whether they **collide** over the same Delta path is conditional, not guaranteed: AG-LAK-002 ran two concurrent `mode("overwrite")` submissions of a notebook writing byte-identical output and both reached `Completed`, no conflict. A write that is not idempotent-looking to Delta's optimistic concurrency check (a genuine append, or an overwrite whose content differs run to run) is the untested case — treat a collision as *possible*, not as the default outcome, and record the exact error your tenant returns when one does happen. Idempotence and concurrency control are the caller's job either way: poll to terminal before resubmitting anything with a side effect.
 
-Submitting a second run while the first is in flight is therefore a legitimate thing to *measure*, and what comes back is worth recording.
+Submitting a second run while the first is in flight is therefore a legitimate thing to *measure*, and what comes back — collision or not — is worth recording.
 
 ## The run tells you almost nothing
 

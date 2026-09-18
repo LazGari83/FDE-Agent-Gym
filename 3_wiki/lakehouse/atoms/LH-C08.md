@@ -7,12 +7,13 @@ title: Build a notebook item from cells, never a bare script
 requires:
   env: [fabric-auth]
   atoms: []
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: proven
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 derived_from: [build-framework, coding-guidance]
 ---
 
@@ -38,3 +39,6 @@ a payload with the prologue but no `# CELL` blocks creates *successfully and emp
 (`sourceContains: ["retail.product"]`, `sourceLacks: ["!pip"]`) — the offline `--lint-source`
 result and the live check agreed exactly, so linting before upload is a reliable predictor
 here, not just a speed trick.
+
+**Re-proven** (AG-LAK-002, 2026-09-18): two notebook items built from `notebook_content_py()`
+in the same rep, both created cleanly in one call each. No deviation.

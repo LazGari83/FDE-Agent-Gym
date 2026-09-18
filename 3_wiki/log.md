@@ -213,3 +213,105 @@ your own environment, as you go.
   from `index.md` and its files-that-never-existed claim from the 2026-08-20 log entry's
   practical effect, or (b) actually port the described seed content from wherever it was
   produced. Until then, treat every `[MISSING]` row as documentation debt, not knowledge.
+
+## [2026-09-18] ingest | AG-LAK-002 (Ravensworth) — concurrency softened, LH-C27 atom promoted
+- Updated: `lakehouse/prerequisites-and-fit.md`, `lakehouse/design-framework.md`,
+  `lakehouse/build-framework.md`, `lakehouse/operate-framework.md`, `lakehouse/gotchas.md`,
+  `lakehouse/atoms/LH-C08.md`, `lakehouse/atoms/LH-C14.md`, `lakehouse/atoms/index.md`.
+- New: `lakehouse/atoms/LH-C27.md` — promoted from the rep's confirmed draft (establish the
+  runtime from the session: `notebookutils.runtime.context`, `importlib.import_module` before
+  assuming a library, a kept probe notebook writing to a table).
+- What proved it: `2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md`.
+- Corrected: `operate-framework.md` and `gotchas.md` stated concurrent identical on-demand
+  submissions **collide** over the same Delta path as the default outcome — a different claim
+  from the 2026-08-30 "Deduped-on-trigger" softening above, this one about on-demand-vs-
+  on-demand collision. AG-LAK-002 ran two concurrent `mode("overwrite")` submissions of
+  byte-identical output and both reached `Completed` with no conflict. Softened to
+  conditional: non-dedup is still confirmed (two distinct job-instance ids every time),
+  collision is possible but not guaranteed — depends on whether the concurrent writes actually
+  conflict at the Delta commit. Old claim not deleted, both outcomes now stated with evidence.
+- Registered `on-demand-concurrent-collision-not-guaranteed` in
+  `.claude/skills/fabric-lint/refuted_claims.py` so the gym is watched for the old
+  unconditional wording; ran `stale_task_claims.py --self-test` clean.
+- Also re-proved with no deviation: LH-C08 (notebook-from-cells), LH-C14 (submit/poll/verify).
+  LH-C23 (design-gate, no atom) got its first concrete evidence of the notebook+notebook+Livy
+  split predicted in `design-framework.md` §5.
+- Reported, not fixed (task-authoring, out of scope for this ingest):
+  `1_agent-gym/lakehouse/AG-LAK-002/validate.json` line 45's `question` text says "the second
+  submission is where Deduped is observed" — this run's own evidence (and the wiki, both
+  before and after this ingest) says on-demand runs are never deduplicated; neither submission
+  in this rep reached `Deduped`. The check itself only asserts `minRuns`/latest-status, so
+  nothing mis-graded — the stale wording is in the human-readable `question` field only.
+- Left open: LH-C06, LH-C12, LH-C15, LH-C18 still untested by any rep. No capability gap
+  surfaced — all four capabilities AG-LAK-002 declared already existed in the spec.
+
+## [2026-09-18] lint | 2 issues found, 0 auto-fixed
+- Deterministic checks run clean: `anchor_check.py` (0 dead anchors across `3_wiki`),
+  `gym_run.py --self-test` (0 failures, no checked-in plan/manifest), `git ls-files | grep
+  __pycache__|.pyc|.pyo` (no tracked build artefacts), `capability_coverage.py --write
+  --check` (lakehouse 13/13 documented, 0 broken capability-id references, `coverage.md`
+  rewritten). `AG-LAK-002/task.md` ↔ `validate.json`: all 12 check ids appear in exactly one
+  `Validate:` list, none orphaned either direction; no capability id or mechanism vocabulary
+  leaked into the task bullets. Every internal `3_wiki` markdown link (fragment and plain)
+  resolves except the 22 already-known phantom rows below. Provenance: every `sources:` entry
+  across the lakehouse cluster and its 5 atoms resolves to a real `2_raw/` file
+  (`2026-09-16-AG-LAK-001-foundry.md`, `2026-09-18-AG-LAK-002-ravensworth.md`). Atom health:
+  all 5 atoms (LH-C02/07/08/14/27) cite a valid spec id and stay under the ~30-line budget
+  (LH-C27 at 29 lines, worth watching on its next revision); no atom debt — LH-C01/LH-C23 are
+  the only other `proven` capabilities and both are design-gate (no atom by design, per
+  `atoms/index.md`'s own note). Community frontmatter present and correct
+  (`frontier-data-engineer`) on all 6 cluster pages and all 5 atoms.
+- **Not new — reconfirming two already-recorded issues, still outstanding:**
+  1. `stale_task_claims.py` still fails (exit 1): `1_agent-gym/lakehouse/AG-LAK-002/validate.json:45`'s
+     `question` text ("the second submission is where Deduped is observed") repeats the claim
+     the wiki refuted this same day. This is the exact issue the 2026-09-18 ingest entry above
+     already reported as "task-authoring, out of scope for this ingest" and registered in
+     `refuted_claims.py` (`on-demand-concurrent-collision-not-guaranteed`) — the registry is
+     doing its job by continuing to flag it. Still needs a maintainer edit to
+     `validate.json`'s prose (the check logic itself is unaffected: it only asserts
+     `minRuns`/latest-status).
+  2. The 22 `[MISSING]` wiki-page rows plus their sections' dangling Toolkit/Spec/Practice
+     links across `azure-app`, `capacity`, `cicd`, `data-agent`, `graph`, `key-vault`,
+     `ontology`, `openmirror`, `pipelines` — first reported 2026-09-17, unchanged since (no
+     commits touched those sections; confirmed via `git diff HEAD -- 3_wiki/index.md`, which
+     shows only the `lakehouse` section changed this session). Still documentation debt, not
+     a regression — see that entry for the full breakdown and the maintainer decision it's
+     waiting on.
+- Left open: same two items above, both awaiting the maintainer (not an unattended fix).
+
+## [2026-09-18] refactor | maintainer resolved the phantom index sections — deleted
+- Maintainer decision on the 2026-09-17 open item: delete, not port. Removed the `## azure-app`,
+  `## capacity`, `## cicd`, `## data-agent`, `## graph`, `## key-vault`, `## ontology`,
+  `## openmirror`, `## pipelines` sections from `3_wiki/index.md` — all 22 rows and their
+  Toolkit/Spec/Practice intro links pointed at files with no commit in this repo's history
+  (confirmed 2026-09-17 via `git log --all --diff-filter=A --name-only -- '3_wiki/*.md'`).
+  `decisions` and `lakehouse` are the only sections left; both are real.
+- Rewrote `## your other topics` to name what's actually on disk: `1_agent-gym/` folders exist
+  for `cicd` · `ingestion` · `key-vault` · `openmirror` · `pipelines`; `azure-app` · `capacity` ·
+  `data-agent` · `graph` · `ontology` · `testing` are declared in `CLAUDE.md`'s topic table but
+  have no gym folder, spec, or code toolkit here yet. (Previous wording listed `capacity` and
+  `testing` alongside the real folders — neither has a `1_agent-gym/` folder either; corrected.)
+- Effect on the 2026-08-20 `refactor` entry above: its "22 new seed pages across 9 topics" claim
+  was already withdrawn in the 2026-09-17 entry as never-landed-here; this entry is the
+  practical cleanup that withdrawal was waiting on. Not re-withdrawing again — same fact,
+  now acted on.
+- What proved it: no new evidence: this is a structural cleanup of the index against the
+  2026-09-17/2026-09-18 lint findings, not a knowledge change. No `2_raw/` citation applies.
+- Left open: if/when any of these 9 topics gets a real spec (`0_admin/capabilities/<topic>.md`,
+  human-owned) and a `1_agent-gym/<topic>/` task, re-add its section here per the `lakehouse`
+  shape — do not restore the deleted rows verbatim, they described pages that were never
+  written.
+
+## [2026-09-18] lint | 1 issue found, 0 auto-fixed
+- Re-ran the full deterministic suite after the phantom-section deletion above to confirm the
+  fix and re-check nothing else moved: `anchor_check.py` (0 dead anchors), `git ls-files | grep
+  __pycache__|.pyc|.pyo` (no tracked build artefacts), `capability_coverage.py --write --check`
+  (lakehouse 13/13 documented, exit 0), `gym_run.py --self-test` (0 failures). **Every internal
+  `3_wiki` markdown link now resolves** — re-ran the same link scan from the prior lint run,
+  which previously listed 55 dangling links across the 9 deleted sections; zero remain.
+  Index-to-disk reconciliation: all 11 files under `3_wiki/lakehouse/` (6 cluster pages + 5
+  atoms) have a row or index entry; no orphans, no dangling `[MISSING]` rows left anywhere.
+- **Not new — same outstanding issue:** `stale_task_claims.py` still fails on
+  `1_agent-gym/lakehouse/AG-LAK-002/validate.json:45` (the `Deduped`-on-second-run claim). Fix
+  instructions were handed to the maintainer this same session; not applied yet as of this run.
+- Left open: the `validate.json:45` edit, per the instructions already on record.

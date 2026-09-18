@@ -5,12 +5,13 @@ category: design-framework
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C02, LH-C06, LH-C10, LH-C14, LH-C18, LH-C23]
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: mixed
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 ---
 
 # Lakehouse — design framework
@@ -63,6 +64,12 @@ Both run Spark; they differ in what they leave behind.
 | Use for | the re-runnable job | probing an unknown surface, ad-hoc checks |
 
 Probe with Livy, ship with a notebook item. A task that asks for a second, genuinely different surface is asking you to separate these two.
+
+**Proven** (AG-LAK-002): a load notebook (Jobs API item) and a kept probe notebook (Jobs API
+item) each earned their place as rebuildable artefacts; a `lab.calibration_summary` rollup
+required by the contract to come from a surface the notebook's own source cannot touch was
+built with one `LivyClient` session (`CREATE OR REPLACE TABLE ... AS SELECT`) and left no item
+behind — exactly the split this table predicts.
 
 ## 6. How the run reports its verdict
 

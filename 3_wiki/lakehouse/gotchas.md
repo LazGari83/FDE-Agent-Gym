@@ -5,12 +5,13 @@ category: gotchas
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C02, LH-C07, LH-C08, LH-C14, LH-C27]
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: mixed
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 ---
 
 # Lakehouse — gotchas
@@ -50,7 +51,7 @@ cleanly, no `dbo` fallback. Atom: [LH-C02](atoms/LH-C02.md).
 
 - **`Completed` is a process exit, not a data assertion.** A notebook that swallows its exception completes green.
 - **Job instances come back unordered.** An older green run will mask a newer failure unless you sort.
-- **On-demand runs are not deduplicated.** Concurrent identical submissions run for real and collide over the same Delta path — one dies with `System_Cancelled_Session_Statements_Failed`.
+- **On-demand runs are not deduplicated** — two real, separate job instances every time (AG-LAK-001, AG-LAK-002). Whether they **collide** is conditional: a first run against this contract saw `System_Cancelled_Session_Statements_Failed` from concurrent writers on the same Delta path; a later rep ran two concurrent `mode("overwrite")` submissions of byte-identical output and both completed clean, no conflict. Do not assume either outcome — record what your tenant actually returns.
 - **A transport error from the poller is not a run failure.** The run may have succeeded; check `list_job_instances` before retrying anything with a side effect.
 - **`failureReason` names no cell, no exception and no stack**, and there is no exit value at all.
 

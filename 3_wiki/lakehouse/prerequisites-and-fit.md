@@ -5,12 +5,13 @@ category: prerequisites-and-fit
 topic: lakehouse
 community: frontier-data-engineer
 capabilities: [LH-C01, LH-C12, LH-C27]
-updated: 2026-09-16
+updated: 2026-09-18
 fabric_release: 2026-09
 status: current
 evidence: mixed
 sources:
   - 2_raw/gym-rep-reports/lakehouse/2026-09-16-AG-LAK-001-foundry.md
+  - 2_raw/gym-rep-reports/lakehouse/2026-09-18-AG-LAK-002-ravensworth.md
 ---
 
 # Lakehouse + notebook — prerequisites and fit
@@ -73,6 +74,12 @@ The runtime ships a great deal, and **checking costs one Livy session** (`import
 **Proven** (AG-LAK-001): `defaultLakehouseWorkspaceId` / `defaultLakehouseId` were populated
 cleanly because `run-notebook` attached the lakehouse at submission (`attachLakehouse: true`
 default) — no separate lookup needed.
+
+**Proven** (AG-LAK-002): a kept probe notebook recorded `python_version`, `spark_version`,
+`runtime_jsonschema` and `default_lakehouse` from the live session into `lab.runtime_facts` —
+`jsonschema` imported cleanly via `importlib.import_module` with no install attempted
+(`available 4.19.2`), and `defaultLakehouseName` read straight off
+`notebookutils.runtime.context` (a plain subscriptable mapping). Atom: [LH-C27](atoms/LH-C27.md).
 
 Two constraints follow, and both are fit questions rather than build details:
 
